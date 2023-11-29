@@ -1,4 +1,3 @@
-import { ChannelType } from "@prisma/client";
 import { currentProfile } from "@/lib/current-profile";
 import { redirect } from "next/navigation";
 import { redirectToSignIn } from "@clerk/nextjs";
@@ -7,6 +6,7 @@ import { ChatMessages } from "@/components/chat/chat-messages";
 import ChatHeader from "@/components/chat/chat-header";
 import { db } from "@/lib/db";
 import { MediaRoom } from "@/components/media-room";
+import { ChannelType } from "@prisma/client";
 
 interface ChannelIdPageProps {
   params: {
@@ -45,7 +45,7 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
         serverId={channel.serverId}
         type="channel"
       />
-      {channel?.type == ChannelType?.TEXT && (
+      {channel?.type == ChannelType.TEXT && (
         <>
           <ChatMessages
             member={member}
