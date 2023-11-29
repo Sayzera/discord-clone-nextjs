@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: . #if your Dockerfile is not at the same level change the path here (./frontend)
+      target: dev
+    restart: always
+    command: npm run dev
+    environment:
+      - NODE_ENV=dev
+      - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_c2FmZS1mb3dsLTMwLmNsZXJrLmFjY291bnRzLmRldiQ
+      - CLERK_SECRET_KEY=sk_test_jYuM91WSqdpld8kmt1PDK8LbP0YXIzpSPgnCasaPsr
+      - NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+      - NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+      - NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+      - NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+      - DATABASE_URL=mysql://jfmgwcfpyfqm1zgusqrz:pscale_pw_NgJnubXFq47XTYvexyTbrKhV2JFjx7HQQFMVpvmAfqv@aws.connect.psdb.cloud/discrodclone?sslaccept=strict
+      - UPLOADTHING_SECRET=sk_live_a62f1ba5191eae66b8d065a7215c50f0c3c5a84e6db7302bc371da5f090f0fa8
+      - UPLOADTHING_APP_ID=3n9gr5w0me
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+      - /app/prisma
+    ports:
+      - 3000:3000
